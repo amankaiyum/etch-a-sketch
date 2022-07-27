@@ -31,6 +31,14 @@ ul {
 .grid {
   width: 650px;
   height: 650px;
-  border: solid black 2px;
+  border: solid black 1px;
   background: whitesmoke;
+}
+
+.row {
+  display: flex;
+}
+
+.box {
+  border: solid grey 1px;
 }
