@@ -19,18 +19,35 @@ function resetGrid() {
   }
 }
 
+function colorBox(color) {
+  let boxes = document.querySelectorAll('.box');
+  boxes.forEach((div) => {
+    div.addEventListener('mouseover', function (e) {
+    e.target.style.background = color;
+    });
+  });
+}
+
 
 const grid = document.querySelector('.grid');
 let width = grid.offsetWidth;
 let height = grid.offsetHeight;
-let slider = document.querySelector('input');
+let slider = document.querySelector('.slider');
 let slidervalue = document.querySelector('.slidervalue');
+let colorpicker = document.querySelector('.colorpicker');
 
 slidervalue.textContent = `${slider.value} x ${slider.value}`;
 createGrid(slider.value);
+colorBox(colorpicker.value);
+
+
 slider.oninput = () => {
   slidervalue.textContent = `${slider.value} x ${slider.value}`;
   resetGrid();
   createGrid(slider.value);
+  colorBox(colorpicker.value);
 };
+
+const eraser = document.querySelector('.eraser');
+const clear = document.querySelector('clear');
 
