@@ -63,7 +63,7 @@ slidervalue.textContent = `${slider.value} x ${slider.value}`;
 createGrid(slider.value);
 colorBox(colorpicker.value);
 
-colorpicker.oninput = () => {
+colorpicker.onchange = () => {
   colorBox(colorpicker.value);
 };
 
