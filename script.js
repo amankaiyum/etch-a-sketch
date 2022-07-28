@@ -28,7 +28,30 @@ function colorBox(color) {
   });
 }
 
+function colorRainbow() {
+  const colors = ['red', 'orange', 'yellow', 'green', 'blue',   'indigo', 'violet']
+  let randomNumber = Math.floor(Math.random() * 7); 
+  let randomColor = colors[randomNumber];
 
+  let boxes = document.querySelectorAll('.box');
+  boxes.forEach((div) => {
+    div.addEventListener('mouseover', function (e) {
+    e.target.style.background = randomColor;
+    });
+  });  
+}
+
+function intervalTrigger() {                  //toggle rainbow mode
+  if (!trigger) {
+    trigger = window.setInterval(colorRainbow, 50);
+  }
+  else {
+    window.clearInterval(trigger);
+    trigger = null;
+  }
+}
+
+let trigger;
 const grid = document.querySelector('.grid');
 let width = grid.offsetWidth;
 let height = grid.offsetHeight;
@@ -40,6 +63,9 @@ slidervalue.textContent = `${slider.value} x ${slider.value}`;
 createGrid(slider.value);
 colorBox(colorpicker.value);
 
+colorpicker.oninput = () => {
+  colorBox(colorpicker.value);
+};
 
 slider.oninput = () => {
   slidervalue.textContent = `${slider.value} x ${slider.value}`;
@@ -49,5 +75,45 @@ slider.oninput = () => {
 };
 
 const eraser = document.querySelector('.eraser');
-const clear = document.querySelector('clear');
+const clear = document.querySelector('.clear');
+const rainbow = document.querySelector('.rainbow');
 
+eraser.addEventListener('click', () => {       //toggle eraser button
+  if (eraser.classList.contains('active')) {      
+    colorBox(colorpicker.value);
+  }
+  else if (rainbow.classList.contains('active')) {
+    rainbow.classList.toggle('active');
+    intervalTrigger();
+    colorBox('whitesmoke')
+  }
+  else {
+    colorBox('whitesmoke');
+  }
+  eraser.classList.toggle('active');
+});
+
+clear.addEventListener('click', () => {     //clear button
+  resetGrid();
+  createGrid(slider.value);
+  colorBox(colorpicker.value);
+  if (eraser.classList.contains('active')) {
+    eraser.classList.toggle('active');
+  }
+  if (rainbow.classList.contains('active')) {
+    rainbow.classList.toggle('active');
+    intervalTrigger();
+  }
+});
+
+rainbow.addEventListener('click', () => {       //rainbow mode
+  if (rainbow.classList.contains('active')) {
+    colorBox(colorpicker.value);
+  }
+  if (eraser.classList.contains('active')) {
+    eraser.classList.toggle('active');
+  }
+  rainbow.classList.toggle('active');
+  intervalTrigger();
+  
+});

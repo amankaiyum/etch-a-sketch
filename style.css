@@ -20,6 +20,21 @@ h1 {
 
 ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  transition-duration: .4s;
+  border-radius: 8px;
+  padding: 6px;
+  border: solid rgb(114, 97, 224) 2px;
+}
+
+button:hover {
+  background-color: rgb(114, 97, 224);
+  color: white
 }
 
 .options button, li {
@@ -49,10 +64,7 @@ ul {
   display: flex;
 }
 
-.box {
-  border: solid grey 1px;
-}
-
-.colored {
-  background-color: black;
+.active {
+  background-color: rgb(114, 97, 224);
+  color: white;
 }
